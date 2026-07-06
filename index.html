@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Wifey - The Day 6 Ultimate Upgrade ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght=700&family=Poppins:wght=300;400;600;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #05010e;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1500px;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: radial-gradient(circle at center, #1f053a 0%, #04000a 100%);
+        }
+
+        .stage {
+            position: absolute;
+            width: 92%;
+            max-width: 460px;
+            padding: 35px 25px;
+            background: rgba(21, 7, 42, 0.78);
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border: 1.5px solid rgba(255, 71, 126, 0.25);
+            border-radius: 32px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9), inset 0 0 40px rgba(255, 71, 126, 0.1);
+            z-index: 10;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.6) rotateX(30deg) translateZ(-300px);
+            pointer-events: none;
+            transition: all 0.85s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .stage.active {
+            opacity: 1;
+            transform: scale(1) rotateX(0deg) translateZ(0);
+            pointer-events: auto;
+            z-index: 12;
+        }
+
+        h1 {
+            font-size: 2.1rem;
+            background: linear-gradient(45deg, #ff477e, #ff85a2, #ff0055);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.4rem;
+            color: #ff85a2;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255,133,162,0.2);
+        }
+
+        .story-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #e6d5fa;
+            margin-bottom: 25px;
+        }
+
+        .highlight-alert {
+            background: rgba(255, 71, 126, 0.1);
+            border: 1px solid rgba(255, 71, 126, 0.3);
+            border-radius: 15px;
+            padding: 15px;
+            font-size: 0.95rem;
+            color: #ffb3c6;
+            margin-bottom: 20px;
+            font-family: monospace;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #ff477e, #ff0055);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(255, 71, 126, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(255, 71, 126, 0.6);
+        }
+
+        .choice-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .choice-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 71, 126, 0.2);
+            color: white;
+            padding: 15px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .choice-btn:hover {
+            background: rgba(255, 71, 126, 0.18);
+            border-color: #ff477e;
+            transform: translateX(6px);
+        }
+
+        .scanner-box {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 25px auto;
+            border: 3px dashed rgba(255, 71, 126, 0.4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: rgba(255, 71, 126, 0.03);
+        }
+
+        .scanner-heart {
+            font-size: 3.5rem;
+            animation: pulse 1.2s infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .scanner-line {
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: #ff477e;
+            box-shadow: 0 0 15px #ff477e;
+            top: 0;
+            left: 0;
+            animation: scan 2.5s linear infinite;
+            pointer-events: none;
+            border-radius: 2px;
+        }
+
+        .quote-box-tamil {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #ffe6ee;
+            font-weight: 500;
+            background: rgba(255, 71, 126, 0.06);
+            border-left: 5px solid #ff477e;
+            padding: 18px;
+            border-radius: 0 20px 20px 0;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .quote-box-english {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #f3e8ff;
+            font-style: italic;
+            background: rgba(147, 51, 234, 0.08);
+            border-right: 5px solid #9333ea;
+            padding: 18px;
+            border-radius: 20px 0 0 20px;
+            margin: 25px 0;
+            text-align: right;
+        }
+
+        .hourglass-wrapper {
+            position: relative;
+            width: 100px;
+            height: 160px;
+            margin: 25px auto;
+        }
+
+        .hourglass-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 1.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .hourglass-frame::before, .hourglass-frame::after {
+            content: '';
+            position: absolute;
+            left: 5%;
+            width: 90%;
+            height: 8px;
+            background: linear-gradient(90deg, #b91c1c, #ff477e, #b91c1c);
+            border-radius: 4px;
+            box-shadow: 0 0 15px #ff477e;
+            z-index: 5;
+        }
+        .hourglass-frame::before { top: 0; }
+        .hourglass-frame::after { bottom: 0; }
+
+        .glass-top, .glass-bottom {
+            position: absolute;
+            left: 10%;
+            width: 80%;
+            height: 75px;
+            border: 2.5px solid rgba(255, 71, 126, 0.45);
+            box-shadow: inset 0 0 20px rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+
+        .glass-top {
+            top: 8px;
+            border-radius: 50% 50% 15% 15% / 80% 80% 20% 20%;
+            border-bottom: none;
+        }
+
+        .glass-bottom {
+            bottom: 8px;
+            border-radius: 15% 15% 50% 50% / 20% 20% 80% 80%;
+            border-top: none;
+        }
+
+        .sand-top-fill {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            width: 90%;
+            height: 100%;
+            background: radial-gradient(circle at top, #ff85a2, #ff477e);
+            border-radius: 50% 50% 0 0;
+            transform-origin: bottom center;
+            animation: emptyTop 12s linear infinite;
+        }
+
+        .sand-stream-flow {
+            position: absolute;
+            top: 78px;
+            left: 49%;
+            width: 3px;
+            height: 78px;
+            background: linear-gradient(to bottom, #ff85a2, #ff477e);
+            z-index: 2;
+            box-shadow: 0 0 8px #ff477e;
+        }
+
+        .sand-bottom-fill {
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            width: 90%;
+            height: 0%;
+            background: radial-gradient(circle at bottom, #ff477e, #ff85a2);
+            border-radius: 0 0 50% 50%;
+            animation: fillBottom 12s linear infinite;
+        }
+
+        .live-counter {
+            font-size: 1.25rem;
+            color: #ffb3c6;
+            font-weight: 700;
+            margin-top: 15px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255,71,126,0.3);
+        }
+
+        .gif-frame {
+            width: 100%;
+            border-radius: 24px;
+            overflow: hidden;
+            margin: 20px 0;
+            border: 2.5px solid #ff477e;
+            box-shadow: 0 20px 50px rgba(255, 71, 126, 0.35);
+            background: #000;
+        }
+
+        .gif-frame img {
+            width: 100%;
+            display: block;
+            max-height: 280px;
+            object-fit: cover;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            50% { top: 100%; }
+            100% { top: 0%; }
+        }
+
+        @keyframes emptyTop {
+            0% { transform: scaleY(1); }
+            100% { transform: scaleY(0); }
+        }
+
+        @keyframes fillBottom {
+            0% { height: 0%; }
+            100% { height: 95%; }
+        }
+
+        .particle-heart {
+            position: absolute;
+            color: #ff477e;
+            pointer-events: none;
+            opacity: 0;
+            animation: floatUp 6s linear infinite;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) scale(0.5) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-10vh) scale(1.2) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-canvas"></div>
+    <audio id="bgm" loop><source src="bgm.mp3" type="audio/mpeg"></audio>
+
+    <!-- STAGE 1 -->
+    <div class="stage active" id="stage1">
+        <h1>⚠️ AREA RESTRICTED!</h1>
+        <div class="highlight-alert">
+            SECURITY_LEVEL: WIFEY_ONLY<br>
+            THREAT: INTRUDERS_NOT_ALLOWED
+        </div>
+        <p class="story-text">Dei automatic firewalls unna block panni vachiruku dhi! Sound fully-ah high la vachuttu kela irukura button mela press panni break-in panna try pannu fast-ah!</p>
+        <button class="btn" onclick="triggerAudioAndAdvance(2)">🔊 Crack Security Code</button>
+    </div>
+
+    <!-- STAGE 2: THE HUSBAND-WIFE VERIFICATION SYSTEM -->
+    <div class="stage" id="stage2">
+        <h1>Wifey Verification 🔒</h1>
+        <h2>Nee Thaan En Pondatti-ya?</h2>
+        <p class="story-text">Indha page-kulla **En Pondatti-ya** thavira yaarkumae ulla வரதுக்கு அனுமதி இல்ல! Verification-kaaga kela irukura biometric sensor mela un viral-ah **3 seconds non-stop hold** pannu dhi...</p>
+        
+        <div class="scanner-box" id="scannerBtn" onmousedown="startScanning()" onmouseup="stopScanning()" ontouchstart="startScanning()" ontouchend="stopScanning()">
+            <div class="scanner-line" id="sLine" style="display:none;"></div>
+            <div class="scanner-heart">❤️</div>
+        </div>
+        <p id="scan-status" style="color: #ff85a2; font-weight: 600; font-size: 0.95rem; margin-top: 10px;">Status: Awaiting alignment check...</p>
+    </div>
+
+    <!-- STAGE 3 -->
+    <div class="stage" id="stage3">
+        <h1>The Loyalty Check! 🧠</h1>
+        <h2>Sariyana mudivu unna kapathum...</h2>
+        <p class="story-text" style="font-weight: 600; color: #ff85a2; text-align: left;">Q: Daily unna ipdi rasi rasi panni pudhu pudhu surprise create panra indha purushan unaku evlo mukkiyam?</p>
+        <div class="choice-container">
+            <button class="choice-btn" onclick="handleWrongChoice(this)">Just formal-ah un kooda pesina podhum 😜</button>
+            <button class="choice-btn" onclick="handleWrongChoice(this)">Therila pa, strict broad-minded custom aache!</button>
+            <button class="choice-btn" onclick="advanceToStage(4)">En vazhkaiyin muthalum mudivum avan thaan! 💕</button>
+        </div>
+        <p id="quiz-error" style="color: #ff477e; font-size: 0.9rem; font-weight: bold; min-height: 20px;"></p>
+    </div>
+
+    <!-- STAGE 4: ALL NEW TAMIL POETRY TEXT CONTENT -->
+    <div class="stage" id="stage4">
+        <h1>என் நெஞ்சக் கூடு... 🌹</h1>
+        <div class="quote-box-tamil">
+            "இதயம் முழுக்க உன் நினைவுகள் மட்டுமே தஞ்சம் கொள்கிறது! காலங்கள் மாறினாலும், என் கரங்கள் கோர்த்து நீ சிரிக்கும் ஒவ்வொரு நொடியும் என் காதல் ஆயுள் கூடுகிறது பேரழகியே..."
+        </div>
+        <p class="story-text">Unmela naan vachurukura paasatha solla indha tamizh varthaigal kooda pathala dhi enaku. Adutha door unakkaga waiting!</p>
+        <button class="btn" onclick="advanceToStage(5)">⌛ Fast-Forward Time</button>
+    </div>
+
+    <!-- STAGE 5 -->
+    <div class="stage" id="stage5">
+        <h1>The Vintage Countdown ⏳</h1>
+        <p class="story-text" style="font-size: 0.95rem;">Namma love trajectory maari indha old-school classic hourglass continuous-ah un bday node-kaga run aayite eruku. Live precision look paaru!</p>
+        
+        <div class="hourglass-wrapper">
+            <div class="hourglass-frame" id="hgElement">
+                <div class="glass-top"><div class="sand-top-fill"></div></div>
+                <div class="sand-stream-flow"></div>
+                <div class="glass-bottom"><div class="sand-bottom-fill"></div></div>
+            </div>
+        </div>
+
+        <div class="live-counter" id="timerDisplay">00D : 00H : 00M : 00S</div>
+        <button class="btn" onclick="advanceToStage(6)" style="margin-top: 20px;">Step Inside Vault 🔑</button>
+    </div>
+
+    <!-- STAGE 6: ALL NEW FLIRT ENGLISH INTENSITY QUOTE -->
+    <div class="stage" id="stage6">
+        <h1>To My Beautiful Wife 🌸</h1>
+        <div class="quote-box-english">
+            "If I could give you one thing in life, I would give you the ability to see yourself through my eyes, only then would you realize how deeply special you are to me. You are my forever."
+        </div>
+        <p class="story-text">Daily ore maari illama indha Day 6 surprise unna full-ah flat aakidum-nu namburen di. Final level loading!</p>
+        <button class="btn" onclick="advanceToStage(7)">🎉 BREAK REVEAL RADAR!</button>
+    </div>
+
+    <!-- STAGE 7: BRAND NEW RE-WRITTEN DIALOGUE CLIMAX -->
+    <div class="stage" id="stage7">
+        <h1>Advance Happy Birthday, Pondatti! 👑💍</h1>
+        <p class="story-text" style="font-weight: 600; color: #ff85a2; margin-bottom: 10px;">The Queen Of My Kingdom! 💞</p>
+        
+        <div class="gif-frame">
+            <img src="gif1.gif" alt="Our Epic Love Track">
+        </div>
+        
+        <p style="font-size: 1.15rem; color: #ff477e; font-weight: 800; font-family: 'Caveat', cursive;">Nee en pakkam irundha indha ulagathaiye jeichடுவேன் தங்கம்! Daily-um unna rasippaen! En pondatti da nee!</p>
+    </div>
+
+    <script>
+        let scanTimer;
+
+        function advanceToStage(idx) {
+            document.querySelectorAll('.stage').forEach(stg => stg.classList.remove('active'));
+            document.getElementById('stage' + idx).classList.add('active');
+
+            if (idx === 5) {
+                setInterval(() => {
+                    const hg = document.getElementById('hgElement');
+                    hg.style.transform = hg.style.transform === 'rotate(180deg)' ? 'rotate(0deg)' : 'rotate(180deg)';
+                }, 12000);
+            }
+        }
+
+        function triggerAudioAndAdvance(nextIdx) {
+            const song = document.getElementById("bgm");
+            song.play().catch(err => console.log("Audio device sync."));
+            advanceToStage(nextIdx);
+        }
+
+        function startScanning() {
+            document.getElementById('sLine').style.display = 'block';
+            document.getElementById('scan-status').innerText = "Matching with Husband profile... Hold on!";
+            document.getElementById('scan-status').style.color = "#ff477e";
+            
+            scanTimer = setTimeout(() => {
+                document.getElementById('scan-status').innerText = "Nee Thaan En Pondatti! Verified! ✅";
+                document.getElementById('scan-status').style.color = "#4ade80";
+                setTimeout(() => { advanceToStage(3); }, 1200);
+            }, 2500);
+        }
+
+        function stopScanning() {
+            clearTimeout(scanTimer);
+            document.getElementById('sLine').style.display = 'none';
+            if(!document.getElementById('scan-status').innerText.includes("Verified")) {
+                document.getElementById('scan-status').innerText = "Access Denied! Intruders blocked. Press 3s.";
+                document.getElementById('scan-status').style.color = "#ef4444";
+            }
+        }
+
+        function handleWrongChoice(btnElement) {
+            const messages = [
+                "Ayyoyo Nooo! 😤 En pondatti correct-ana block mattum thaan click pannanum!",
+                "Thappu! Check your heart memory and try again pondatti! 😜",
+                "Appadilaam solla koodadhu! Fast-ah right option choose pannu chellam!"
+            ];
+            const chosenMsg = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById("quiz-error").innerText = chosenMsg;
+            btnElement.style.transform = 'scale(0.92)';
+            btnElement.style.opacity = '0.5';
+        }
+
+        const targetBirthday = new Date("July 13, 2026 00:00:00").getTime();
+        setInterval(() => {
+            const rightNow = new Date().getTime();
+            const distance = targetBirthday - rightNow;
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if(document.getElementById("timerDisplay")) {
+                document.getElementById("timerDisplay").innerText = `${d}Days : ${h}Hrs : ${m}Mins : ${s}Secs`;
+            }
+        }, 1000);
+
+        const canvasBg = document.getElementById('bg-canvas');
+        const heartShapes = ['❤️', '💖', '✨', '💕', '🌸'];
+        function spawnLuxuryFloatingHearts() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle-heart');
+            particle.innerText = heartShapes[Math.floor(Math.random() * heartShapes.length)];
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.fontSize = Math.random() * 18 + 12 + 'px';
+            const dynamicSpeed = Math.random() * 3 + 5;
+            particle.style.animationDuration = dynamicSpeed + 's';
+            canvasBg.appendChild(particle);
+            setTimeout(() => { particle.remove(); }, dynamicSpeed * 1000);
+        }
+        setInterval(spawnLuxuryFloatingHearts, 320);
+    </script>
+</body>
+</html>
